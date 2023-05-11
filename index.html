@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js"></script>
+    <title>Devoir Js</title>          
+  </head>
+  <body>
+    <!-- burger menu -->
+    <div>
+      <div id="joueurs">
+        <p>Messi</p>
+        <p>Neymar</p>
+        <p>Suarez</p>
+        <p>Xavi</p>
+        <p>Inesta</p>
+      </div>
+      <img src="menu-burger.png" alt="mon icone" onclick="menuBurger()" width="25" height="25">
+
+    </div>
+    
+    
+    <!-- dark mode -->
+    <button onclick="DarkMode()" id="modeSombre" style="margin-top: 24px;">Dark Mode</button> 
+
+
+    <!-- generateur de mot de passe -->  
+    <form onsubmit="handleSubmit(event)" style="margin-top: 24px;">
+        <label for="longueurPassword">Longueur du mot de passe :</label>
+        <input type="number" id="longueurPassword" name="longueurPassword" min="5" max="50" value="5">
+        <br>
+        <button type="submit">Générer le mot de passe</button>
+    </form>
+    <label for="password">Mot de passe généré :</label>
+    <input type="text" id="password" name="password" readonly>
+
+
+    <!-- convertisseur de temperature -->
+    <form id="convertion" style="margin-top: 24px;">
+        <label>
+          Température :
+          <input type="number" name="temperature" required>
+        </label>
+        <br>
+        <label>
+          Unité :
+          <select name="unit" required>
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+          </select>
+        </label>
+        <br>
+        <button type="submit">Convertir</button>
+    </form>
+    <p id="resultat"></p>
+
+
+    <!-- afficher une citation -->
+    <button onclick="afficherCitation()" style="margin-top: 24px;">Citation aléatoire</button>
+
+
+    <!-- les fonction en js -->
+    <script>
+        //Création d’un convertisseur qui transforme les degrés Celsius en Fahrenheit et inversement
+        const form = document.getElementById('convertion');
+        const resultat = document.getElementById('resultat');
+        
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          
+          const temperature = parseFloat(form.temperature.value);
+          const unit = form.unit.value;
+          let temperatureConverti;
+          
+          if (unit === "C") {
+         temperatureConverti = temperature * 9/5 + 32;
+            resultat.textContent = `${temperature}°C = ${temperatureConverti}°F`;
+          } else if (unit === "F") {
+         temperatureConverti = (temperature - 32) * 5/9;
+            resultat.textContent = `${temperature}°F = ${temperatureConverti}°C`;
+          } else {
+            resultat.textContent = "Svp entrez 'C' pour Celsius ou 'F' pour Fahrenheit.";
+          }
+        });  
+        
+    </script>
+</body>
+</html>
